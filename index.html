@@ -1,0 +1,660 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>CivisLab · Propuesta para campañas 2027</title><meta name="robots" content="noindex, nofollow"><meta name="description" content="Información verificable para decidir con anticipación."><meta property="og:title" content="CivisLab · Propuesta para campañas 2027"><meta property="og:description" content="Información verificable para decidir con anticipación."><meta property="og:image" content="https://carloscallegalvis-cmyk.github.io/civislab-propuesta/og.png"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;900&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+/* === TEMA ===
+   Presentación institucional de CivisLab sobre un lienzo fijo de 1920×1080 que se escala completo.
+   Láminas claras en papel con acentos verde y salvia; láminas de apertura y cierre en verde. */
+:root{
+  color-scheme:light;
+  --verde:#2B4B48; --verde-2:#22403C; --salvia:#96B483; --salvia-2:#C9D6C6;
+  --negro:#222222; --texto2:#4F5A55; --texto3:#6B756F;
+  --papel:#F4F5F2; --blanco:#FBFCFA; --linea:#DCDDDA;
+  --stage-bg:#0E1918; --slide-bg:#F4F5F2;
+  --display:'Orbitron',ui-sans-serif,system-ui,sans-serif;
+  --body:'Barlow',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+
+/* === BASE DE LIENZO FIJO (viewport-base) === */
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--stage-bg,#000)}
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg,#000)}
+.deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:var(--slide-bg,#fff)}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;display:block;visibility:hidden;opacity:0;pointer-events:none;background:var(--slide-bg,#fff);transition:opacity .45s ease,visibility .45s}
+.slide.active,.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1}
+img,video,canvas,svg{max-width:100%;max-height:100%}
+.deck-controls{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:1000}
+@media print{
+  html,body{width:1920px;height:auto;overflow:visible;background:#fff}
+  .deck-viewport{position:static;overflow:visible;background:#fff}
+  .deck-stage{position:static;width:auto;height:auto;transform:none!important;background:none}
+  .slide{position:relative;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;width:1920px;height:1080px;break-after:page;page-break-after:always}
+  .slide:last-child{break-after:auto;page-break-after:auto}
+  .deck-controls{display:none!important}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important}}
+
+body{font-family:var(--body);color:var(--negro);-webkit-font-smoothing:antialiased}
+
+/* === TIPOS DE LÁMINA === */
+.slide.light{background:var(--papel);color:var(--negro)}
+.slide.dark{background:radial-gradient(ellipse at 78% 50%,#335A55 0%,#2B4B48 45%,#213B38 100%);color:var(--papel)}
+
+/* === CROMO DE LÁMINA (logo, sección, pie, página) === */
+.chrome-top{position:absolute;top:44px;left:96px;right:96px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:var(--display);font-weight:900;font-size:30px;letter-spacing:.02em;display:inline-flex;align-items:center;color:var(--salvia)}
+.logo .bar{display:inline-block;width:5px;height:25px;background:var(--salvia);margin:0 3px;transform:translateY(1px)}
+.logo .l{color:var(--verde);margin-left:8px}
+.dark .logo .l{color:var(--papel)}
+.section-tag{font-family:var(--display);font-size:18px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--texto3)}
+.dark .section-tag{color:var(--salvia-2)}
+.chrome-bottom{position:absolute;bottom:40px;left:96px;right:96px;display:flex;justify-content:space-between;align-items:baseline;font-size:20px;color:var(--texto3);border-top:1px solid var(--linea);padding-top:16px}
+.dark .chrome-bottom{color:var(--salvia-2);border-top-color:rgba(201,214,198,.25)}
+.pg{font-family:var(--display);font-weight:600;letter-spacing:.08em}
+.chrome-bottom span:first-child{max-width:720px;line-height:1.35}
+
+/* === ÁREA DE CONTENIDO === */
+.content{position:absolute;top:138px;left:96px;right:96px;bottom:118px;display:flex;flex-direction:column}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.18em;text-transform:uppercase;color:var(--verde)}
+.dark .eyebrow{color:var(--salvia)}
+h1,h2{font-family:var(--display);font-weight:700;letter-spacing:-.005em;text-wrap:balance}
+h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:1500px}
+.dark h2{color:var(--papel)}
+.lead{font-size:32px;line-height:1.45;color:var(--texto2);max-width:1360px;margin-top:22px}
+.dark .lead{color:var(--salvia-2)}
+.note{font-size:20px;line-height:1.5;color:var(--texto3)}
+.statement{font-size:34px;font-weight:600;line-height:1.4;color:var(--verde);background:var(--blanco);border-left:6px solid var(--salvia);border-radius:0 10px 10px 0;padding:24px 36px}
+
+/* === ANIMACIÓN DE ENTRADA === */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.slide.visible .reveal{opacity:1;transform:none}
+.slide.visible .reveal:nth-child(2){transition-delay:.08s}
+.slide.visible .reveal:nth-child(3){transition-delay:.16s}
+.slide.visible .reveal:nth-child(4){transition-delay:.24s}
+.slide.visible .reveal:nth-child(5){transition-delay:.32s}
+
+/* === PORTADA Y CIERRE === */
+.cover-map{position:absolute;right:110px;top:150px;width:640px;height:758px;object-fit:contain;opacity:.95}
+.cover-body{position:absolute;left:96px;top:250px;width:1060px;display:flex;flex-direction:column;gap:30px}
+.cover-body h1{font-size:84px;line-height:1.08;color:var(--papel)}
+.cover-body .lead{margin-top:0;font-size:34px}
+.contact-block{display:flex;flex-direction:column;gap:8px;border-left:4px solid var(--salvia);padding:6px 0 6px 24px}
+.contact-block .hello{font-size:28px;font-style:italic;font-weight:500;color:var(--papel);margin-bottom:6px}
+.contact-block .who{font-size:30px;color:var(--salvia-2)}
+.contact-block .who b{color:var(--papel);font-weight:700}
+.contact-block .how{font-size:26px;color:var(--salvia-2);font-variant-numeric:tabular-nums}
+
+/* === CIFRAS === */
+.kpis{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:28px;margin-top:56px}
+.kpi{background:var(--blanco);border:1px solid var(--linea);border-top:6px solid var(--verde);border-radius:14px;padding:40px 40px 36px}
+.kpi:nth-child(2){border-top-color:var(--salvia)}
+.kpi:nth-child(3){border-top-color:var(--negro)}
+.kpi .n{font-family:var(--display);font-weight:900;font-size:104px;line-height:1;color:var(--verde);font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .n small{font-size:52px;font-weight:700}
+.kpi p{font-size:28px;line-height:1.4;color:var(--texto2);margin-top:20px}
+
+/* === TARJETAS EN COLUMNAS === */
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px}
+.card{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:40px;display:flex;flex-direction:column;gap:16px}
+.card h3{font-family:var(--body);font-size:36px;font-weight:700;line-height:1.2;color:var(--negro)}
+.card p{font-size:27px;line-height:1.45;color:var(--texto2)}
+.card .k{font-family:var(--display);font-size:18px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--texto3)}
+.card .q{font-size:29px;font-weight:600;font-style:italic;line-height:1.3;color:var(--verde)}
+.card.t-verde{border-top:6px solid var(--verde)}
+.card.t-salvia{border-top:6px solid var(--salvia)}
+.card.t-negro{border-top:6px solid var(--negro)}
+.principles{display:flex;gap:40px;margin-top:auto;font-size:26px;font-weight:600;color:var(--verde)}
+.principles span{display:inline-flex;align-items:center;gap:12px}
+.principles span::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--salvia)}
+
+/* === DEMOSTRACIÓN EMBEBIDA === */
+.demo-head{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.demo-head h2{font-size:52px;margin-top:14px}
+.btn{display:inline-flex;align-items:center;gap:14px;font-family:var(--body);font-size:24px;font-weight:700;color:var(--papel);background:var(--verde);border:0;border-radius:999px;padding:16px 30px;cursor:pointer;white-space:nowrap;transition:background .2s}
+.btn:hover{background:#20393A}
+.btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2}
+.demo-frame{position:relative;margin-top:26px;flex:1;min-height:0;border-radius:14px;overflow:hidden;border:1px solid #1E3330;background:#0D1817;box-shadow:0 24px 60px rgba(14,25,24,.22)}
+.demo-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.demo-msg{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#BCCBC3;font-size:26px;padding:40px}
+.demo-msg a{color:#B9D0AA}
+.demo-cap{margin-top:16px}
+
+/* === RADAR DE ACTORES === */
+.hyp{display:flex;align-items:center;gap:16px;margin-top:22px;background:#FFF6E3;border:1px solid #E8C27A;border-radius:10px;padding:14px 22px;font-size:23px;font-weight:600;color:#6B4E12}
+.hyp b{font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:19px;color:#8A6215}
+.radar{width:100%;border-collapse:separate;border-spacing:0;margin-top:20px;background:var(--blanco);border:1px solid var(--linea);border-radius:14px;overflow:hidden;font-size:23px}
+.radar th,.radar td{padding:12px 24px;text-align:left;border-bottom:1px solid var(--linea);vertical-align:middle}
+.radar tr:last-child td{border-bottom:0}
+.radar thead th{font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--texto3);background:#EEF0EC}
+.radar td.name{font-weight:700;font-size:25px;color:var(--negro);width:23%}
+.radar td.muted{color:var(--texto2)}
+.radar td.src{color:var(--texto3);font-size:21px;width:17%}
+.radar td.esc{width:24%}
+.esc-row{display:flex;align-items:center;gap:18px}
+.esc-n{font-family:var(--display);font-weight:700;font-size:27px;color:var(--verde);min-width:78px;font-variant-numeric:tabular-nums}
+.esc-bar{position:relative;flex:1;height:14px}
+.esc-bar::before{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:#D5D9D2}
+.esc-bar .w{position:absolute;top:2px;height:10px;border-radius:5px;background:var(--salvia);opacity:.55}
+.esc-bar .pt{position:absolute;top:0;width:14px;height:14px;border-radius:50%;background:var(--verde);transform:translateX(-50%)}
+.esc-r{font-size:19px;color:var(--texto3);margin-top:4px;font-variant-numeric:tabular-nums}
+.verdict{align-self:flex-start;display:inline-block;margin-top:20px;font-size:24px;font-weight:700;color:var(--papel);background:var(--verde);border-radius:999px;padding:8px 22px}
+
+/* === METODOLOGÍA === */
+.method{display:grid;grid-template-columns:1.08fr 1fr;gap:56px;margin-top:36px;align-items:start}
+.crit{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:22px 40px;align-self:start}
+.crit-row{display:grid;grid-template-columns:1fr 92px;gap:4px 24px;align-items:center;padding:10px 0;border-bottom:1px solid var(--linea)}
+.crit-row:last-of-type{border-bottom:0}
+.crit-row b{font-size:29px;font-weight:700}
+.crit-row .w{font-family:var(--display);font-weight:700;font-size:30px;color:var(--verde);text-align:right;font-variant-numeric:tabular-nums}
+.crit-row .bar{grid-column:1 / -1;height:10px;border-radius:5px;background:#E6E9E3;overflow:hidden}
+.crit-row .bar i{display:block;height:100%;background:var(--verde);border-radius:5px}
+.crit-row p{grid-column:1 / -1;font-size:21px;color:var(--texto3);line-height:1.3}
+.crit-total{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:14px;border-top:2px solid var(--verde);font-size:26px;font-weight:700;color:var(--verde)}
+.crit-total span:last-child{font-family:var(--display)}
+.steps{list-style:none;display:flex;flex-direction:column;gap:22px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:64px 1fr;gap:4px 22px;align-items:start}
+.steps li::before{content:counter(s);grid-row:span 2;width:56px;height:56px;border-radius:50%;background:var(--verde);color:var(--papel);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:24px}
+.steps b{font-size:30px;line-height:1.25;color:var(--negro)}
+.steps p{font-size:25px;line-height:1.45;color:var(--texto2)}
+
+/* === MAPA DE EMOCIONES === */
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px}
+.layer{border-radius:14px;padding:40px;display:flex;flex-direction:column;gap:14px}
+.layer .n{font-family:var(--display);font-weight:900;font-size:64px;line-height:1}
+.layer h3{font-family:var(--body);font-size:40px;font-weight:700}
+.layer p{font-size:27px;line-height:1.45}
+.layer.l1{background:#3A5E5A;color:var(--papel)} .layer.l1 .n{color:var(--salvia)} .layer.l1 p{color:#DCE6D8}
+.layer.l2{background:#4B7370;color:var(--papel)} .layer.l2 .n{color:#C7D9BC} .layer.l2 p{color:#EAF0E7}
+.layer.l3{background:var(--salvia);color:#1F3533} .layer.l3 .n{color:#1F3533} .layer.l3 p{color:#1F3533}
+.result{margin-top:40px;font-size:34px;font-weight:600;color:var(--papel)}
+
+/* === PULSO TERRITORIAL === */
+.flow{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:44px;counter-reset:f}
+.flow li{counter-increment:f;background:rgba(244,245,242,.08);border:1px solid rgba(201,214,198,.28);border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;gap:10px;position:relative}
+.flow li::before{content:counter(f);font-family:var(--display);font-weight:900;font-size:40px;line-height:1;color:var(--salvia)}
+.flow li b{font-size:32px;font-weight:700;color:var(--papel)}
+.flow li span{font-size:22px;line-height:1.4;color:#DCE6D8}
+.edge{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:auto}
+.edge div{border-left:5px solid var(--salvia);padding:4px 0 4px 24px}
+.edge h3{font-size:30px;font-weight:700;color:var(--papel)}
+.edge p{font-size:23px;line-height:1.45;color:#DCE6D8;margin-top:8px}
+.brief-wrap{flex-direction:row;gap:72px;align-items:center}
+.brief-text{flex:1;display:flex;flex-direction:column}
+.brief-text h2{font-size:54px}
+.brief-points{list-style:none;display:flex;flex-direction:column;gap:22px;margin-top:40px}
+.brief-points li{display:flex;flex-direction:column;gap:4px;border-left:5px solid var(--salvia);padding-left:24px}
+.brief-points b{font-size:30px;color:var(--verde)}
+.brief-points span{font-size:26px;line-height:1.4;color:var(--texto2)}
+.brief-text .hyp{margin-top:36px;align-self:flex-start}
+.phone{width:560px;height:816px;flex:none;border-radius:48px;background:#111;padding:16px;box-shadow:0 30px 70px rgba(14,25,24,.28)}
+.phone-top{display:flex;align-items:center;gap:16px;background:#1F3B38;color:#fff;border-radius:34px 34px 0 0;padding:20px 24px}
+.phone-top .av{width:48px;height:48px;border-radius:50%;background:var(--salvia);color:#1F3533;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:18px}
+.phone-top b{display:block;font-size:22px}
+.phone-top small{font-size:16px;color:#C9D6C6}
+.chat{height:calc(100% - 88px);background:#EEF1EC;border-radius:0 0 34px 34px;padding:18px 18px;overflow:hidden}
+.msg{background:#fff;border-radius:4px 18px 18px 18px;padding:16px 20px 28px;position:relative;box-shadow:0 1px 1px rgba(0,0,0,.08);font-size:17.5px;line-height:1.38;color:#222}
+.m-h{font-weight:800;font-size:22px}
+.m-sub{color:#6B756F;font-size:17px;margin-bottom:12px}
+.m-alert{background:#FDECEA;border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.m-alert i{display:inline-block;width:12px;height:12px;border-radius:50%;background:#C0392B;margin-right:8px}
+.m-list{padding-left:24px;margin-bottom:12px}
+.m-list li{margin-bottom:4px}
+.m-do{background:#EEF4EA;border-radius:10px;padding:10px 12px;margin-bottom:10px}
+.m-src{font-size:15px;color:#6B756F}
+.msg-2{margin-top:14px;padding-bottom:28px}
+.msg-2 .m-alert{margin-bottom:8px}
+.m-time{position:absolute;right:16px;bottom:8px;font-size:14px;color:#8A938D}
+
+/* === PORTADA Y CIERRE: retícula === */
+.cover-grid{position:absolute;left:96px;top:150px;bottom:72px;width:1060px;display:flex;flex-direction:column;justify-content:space-between}
+.cover-main{display:flex;flex-direction:column;padding-top:84px}
+.cover-main h1{font-size:68px;line-height:1.12;color:var(--papel);margin-top:28px;white-space:nowrap;text-wrap:nowrap}
+.cover-lead{font-size:31px;line-height:1.45;color:var(--salvia-2);max-width:900px;margin-top:36px;padding-top:32px;border-top:1px solid rgba(201,214,198,.3)}
+.signature{border-top:1px solid rgba(201,214,198,.3);padding-top:26px;display:flex;flex-direction:column;gap:14px}
+.sig-hello{font-size:27px;font-weight:500;color:var(--papel)}
+.sig-close{font-family:var(--display);font-size:30px;font-weight:700;letter-spacing:.02em;color:var(--salvia)}
+.sig-row{display:flex;align-items:center;gap:22px;font-size:23px;color:var(--salvia-2);font-variant-numeric:tabular-nums}
+.sig-name{display:flex;gap:12px;align-items:baseline}
+.sig-name b{color:var(--papel);font-weight:700}
+.sig-sep{width:1px;height:26px;background:rgba(201,214,198,.4)}
+.recap{display:flex;gap:16px;margin-top:44px}
+.recap span{display:flex;flex-direction:column;gap:4px;border:1px solid rgba(201,214,198,.35);border-radius:12px;padding:16px 24px;font-size:20px;color:var(--salvia-2);letter-spacing:.04em;text-transform:uppercase}
+.recap b{font-family:var(--body);font-size:28px;letter-spacing:0;text-transform:none;color:var(--papel)}
+.msg-out{background:#D7EFC9;border-radius:18px 4px 18px 18px;margin:14px 0 0 64px;padding:12px 18px 26px}
+
+/* === ENTREGABLES === */
+.grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:48px}
+.deliv{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:38px 42px;display:flex;flex-direction:column;gap:14px}
+.freq{align-self:flex-start;font-size:20px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:5px 16px;background:#E3ECDD;color:var(--verde)}
+.freq.d{background:var(--verde);color:var(--papel)}
+.deliv h3{font-size:36px;font-weight:700;line-height:1.2}
+.deliv p{font-size:28px;line-height:1.45;color:var(--texto2)}
+
+/* === TABLA COMPARATIVA === */
+.cmp{width:100%;border-collapse:separate;border-spacing:0;margin-top:52px;font-size:29px;background:var(--blanco);border:1px solid var(--linea);border-radius:14px;overflow:hidden}
+.cmp th,.cmp td{padding:21px 34px;text-align:left;border-bottom:1px solid var(--linea);vertical-align:top}
+.cmp tr:last-child td{border-bottom:0}
+.cmp thead th{font-family:var(--display);font-size:19px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--texto3);background:#EEF0EC}
+.cmp thead th.us{background:var(--verde);color:var(--papel)}
+.cmp td:first-child{font-weight:700;width:26%}
+.cmp td:nth-child(2){color:var(--texto3);width:33%}
+.cmp td.us{color:var(--verde);font-weight:600;background:#F1F5EE}
+.refs{margin-top:22px}
+
+/* === GARANTÍAS === */
+.guar{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:64px}
+.g{display:grid;grid-template-columns:76px 1fr;gap:10px 28px;background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:52px 48px;align-items:start}
+.g .ic{grid-row:span 2;width:68px;height:68px;border-radius:16px;background:#E3ECDD;display:grid;place-items:center}
+.g .ic svg{width:36px;height:36px;fill:none;stroke:var(--verde);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.g h3{font-size:36px;font-weight:700}
+.g p{font-size:28px;line-height:1.45;color:var(--texto2)}
+
+/* === CIERRE === */
+.close-body{position:absolute;left:96px;top:270px;width:1080px;display:flex;flex-direction:column;gap:32px}
+.close-body h1{font-size:78px;line-height:1.1;color:var(--papel)}
+.close-body .next{font-size:36px;font-weight:600;color:var(--papel)}
+.close-body .contact{font-size:28px;color:var(--salvia-2)}
+
+/* === CONTROLES (fuera del lienzo) === */
+.deck-controls{display:flex;align-items:center;gap:6px;background:rgba(14,25,24,.86);border:1px solid #2A4440;border-radius:999px;padding:6px;font-family:var(--body);color:#E6ECE4;backdrop-filter:blur(6px)}
+.deck-controls button{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:inherit;cursor:pointer;display:grid;place-items:center}
+.deck-controls button:hover{background:#22403C}
+.deck-controls button:focus-visible{outline:2px solid #96B483;outline-offset:2px}
+.deck-controls svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.counter{min-width:76px;text-align:center;font-size:15px;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.deck-controls{transition:opacity .3s}
+.deck-controls.idle{opacity:0;pointer-events:none}
+.progress{position:fixed;left:0;top:0;height:3px;background:#96B483;z-index:1000;transition:width .4s var(--ease)}
+
+/* === DEMO A PANTALLA COMPLETA === */
+.overlay{position:fixed;inset:0;z-index:2000;background:#0D1817;display:flex;flex-direction:column}
+.overlay-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #2A4440;color:#BCCBC3;font-family:var(--body);font-size:15px}
+.overlay-bar button{min-height:40px;padding:8px 18px;border-radius:999px;border:1px solid #3B5C56;background:#192D2A;color:#EEF2EC;font:600 15px var(--body);cursor:pointer}
+.overlay-bar button:hover{border-color:#96B483}
+.overlay iframe{flex:1;width:100%;border:0}
+</style>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage" aria-live="polite">
+
+<!-- === 1 · PORTADA === -->
+<section class="slide dark active visible" aria-label="Portada">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Elecciones territoriales 2027</span></div>
+  <img class="cover-map" src="mapa-colombia.png" alt="Mapa de Colombia con Antioquia resaltada y el Valle de Aburrá señalado">
+  <div class="cover-grid">
+    <div class="cover-main">
+      <p class="eyebrow reveal">Inteligencia territorial para campañas</p>
+      <h1 class="reveal">Información verificable<br>para decidir<br>con anticipación</h1>
+      <p class="cover-lead reveal">CivisLab integra resultados electorales, estructuras de poder y conversación pública en una lectura estratégica del territorio.</p>
+    </div>
+    <div class="signature reveal">
+      <p class="sig-hello">Mucho gusto, para mí es un placer hacer equipo contigo.</p>
+      <div class="sig-row"><span class="sig-name"><b>Carlos Calle Galvis</b>Fundador y CEO</span><span class="sig-sep" aria-hidden="true"></span><span class="sig-data">info.civislab@gmail.com</span><span class="sig-sep" aria-hidden="true"></span><span class="sig-data">+57 320 667 0213</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- === 2 · CONTEXTO === -->
+<section class="slide light" aria-label="Contexto">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Contexto</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">Contexto</p>
+    <h2 class="reveal">Las elecciones locales se definen por márgenes estrechos</h2>
+    <div class="kpis reveal">
+      <div class="kpi"><div class="n">39 <small>de 125</small></div><p>alcaldías de Antioquia se definieron en 2023 por menos de 5 puntos porcentuales.</p></div>
+      <div class="kpi"><div class="n">12</div><p>de ellas, por menos de 2 puntos.</p></div>
+      <div class="kpi"><div class="n">0,1 <small>pts</small></div><p>separaron al ganador del segundo lugar en La Estrella.</p></div>
+    </div>
+    <p class="statement reveal" style="margin-top:auto">En contiendas así de cerradas, cada decisión de campaña cuenta, y su calidad depende de la información con que se toma.</p>
+  </div>
+  <div class="chrome-bottom"><span>Fuente: Registraduría Nacional del Estado Civil, alcaldías 2023; diferencia entre primer y segundo lugar. Cálculo CivisLab.</span><span class="pg">02</span></div>
+</section>
+
+<!-- === 3 · DIAGNÓSTICO === -->
+<section class="slide light" aria-label="Diagnóstico">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Diagnóstico</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">Diagnóstico</p>
+    <h2 class="reveal">Las campañas deciden con información fragmentada</h2>
+    <div class="cols reveal">
+      <div class="card t-verde"><h3>Mediciones puntuales</h3><p>Las encuestas describen un momento, tardan en llegar y pierden vigencia en pocas semanas.</p></div>
+      <div class="card t-salvia"><h3>Fuentes desconectadas</h3><p>Resultados históricos, redes sociales y reportes de terreno se analizan por separado y sin un criterio común.</p></div>
+      <div class="card t-negro"><h3>Un mapa político en transformación</h3><p>En 2023, 80 de 125 alcaldes de Antioquia llegaron por movimientos sin un bloque partidista identificable. La etiqueta de partido ya no anticipa el voto.</p></div>
+    </div>
+    <p class="statement reveal" style="margin-top:auto">La ventaja competitiva está en integrar la información y leerla a tiempo.</p>
+  </div>
+  <div class="chrome-bottom"><span>Fuente: Registraduría Nacional y CEDAE-Uniandes, alcaldías 2015–2023. Clasificación de avales: CivisLab.</span><span class="pg">03</span></div>
+</section>
+
+<!-- === 4 · QUÉ ES CIVISLAB === -->
+<section class="slide light" aria-label="Qué es CivisLab">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">CivisLab</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">Quiénes somos</p>
+    <h2 class="reveal">Información territorial para la decisión pública</h2>
+    <p class="lead reveal">CivisLab convierte datos públicos y verificables en lectura estratégica. Tres componentes producen una sola lectura del municipio.</p>
+    <div class="cols reveal" style="margin-top:40px">
+      <div class="card t-verde"><span class="k">Modelo electoral</span><h3>IPET</h3><p class="q">¿Qué probabilidad tiene cada candidatura?</p><p>Escenarios construidos sobre resultados oficiales de alcaldía desde el año 2000, con rangos de incertidumbre.</p></div>
+      <div class="card t-salvia"><span class="k">Estructuras de poder</span><h3>Atlas</h3><p class="q">¿Quién mueve el voto en el territorio?</p><p>Casas políticas, liderazgos, alianzas y contratación pública del municipio.</p></div>
+      <div class="card t-negro"><span class="k">Social listening inteligente</span><h3>Pulso Territorial</h3><p class="q">¿Qué conversa cada comuna y vereda, y cómo lo siente?</p><p>Agenda, tono y reacción en medios comunitarios, portales locales, redes públicas y terreno.</p></div>
+    </div>
+  </div>
+  <div class="chrome-bottom"><span>Procedencia trazable · Validación contra resultados reales · Uso confidencial</span><span class="pg">04</span></div>
+</section>
+
+<!-- === 5 · DEMOSTRACIÓN === -->
+<section class="slide light" aria-label="Demostración" id="slideDemo">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Demostración</span></div>
+  <div class="content">
+    <div class="demo-head">
+      <div><p class="eyebrow">Demostración</p><h2>Del departamento al municipio</h2></div>
+      <button class="btn" type="button" id="openDemo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Pantalla completa</button>
+    </div>
+    <div class="demo-frame" id="demoFrame"><div class="demo-msg" id="demoMsg">Cargando la demostración…</div></div>
+    <p class="note demo-cap">Simulación con datos ilustrativos para el Valle de Aburrá. Los resultados de 2019 y 2023 provienen de la Registraduría Nacional; las candidaturas y probabilidades de 2027 son ficticias.</p>
+  </div>
+  <div class="chrome-bottom"><span>Recorrido automático; cualquier interacción lo detiene.</span><span class="pg">05</span></div>
+</section>
+
+<!-- === 6 · RADAR DE ACTORES === -->
+<section class="slide light" aria-label="Radar de actores">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Radar de actores</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">IPET · Radar de actores</p>
+    <h2 class="reveal">Municipio A, 2027: quién aparece en el radar</h2>
+    <p class="hyp reveal"><b>Escenario hipotético</b> Municipio, candidaturas y porcentajes ficticios para mostrar el formato del servicio. No son encuesta, sondeo ni pronóstico.</p>
+    <table class="radar reveal">
+      <thead><tr><th scope="col">Candidatura</th><th scope="col">Trayectoria</th><th scope="col">Estructura</th><th scope="col">Señal pública</th><th scope="col">Escenario hipotético</th></tr></thead>
+      <tbody>
+        <tr><td class="name">Candidato 1</td><td class="muted">Exalcalde del municipio</td><td class="muted">Casa política tradicional</td><td class="src">Prensa regional</td><td class="esc"><div class="esc-row"><span class="esc-n">21 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:37.5%;width:30.0%"></i><i class="pt" style="left:52.5%"></i></div></div><div class="esc-r">rango 15–27 %</div></td></tr>
+        <tr><td class="name">Candidato 2</td><td class="muted">Concejal en ejercicio</td><td class="muted">Movimiento ciudadano</td><td class="src">Redes y emisora local</td><td class="esc"><div class="esc-row"><span class="esc-n">19 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:32.5%;width:30.0%"></i><i class="pt" style="left:47.5%"></i></div></div><div class="esc-r">rango 13–25 %</div></td></tr>
+        <tr><td class="name">Candidato 3</td><td class="muted">Exsecretario de despacho</td><td class="muted">Coalición de gobierno saliente</td><td class="src">Prensa regional</td><td class="esc"><div class="esc-row"><span class="esc-n">23 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:42.5%;width:30.0%"></i><i class="pt" style="left:57.5%"></i></div></div><div class="esc-r">rango 17–29 %</div></td></tr>
+        <tr><td class="name">Candidato 4</td><td class="muted">Líder comunitario</td><td class="muted">Firmas ciudadanas</td><td class="src">Terreno</td><td class="esc"><div class="esc-row"><span class="esc-n">17 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:30.0%;width:27.5%"></i><i class="pt" style="left:42.5%"></i></div></div><div class="esc-r">rango 12–23 %</div></td></tr>
+        <tr><td class="name">Candidato 5</td><td class="muted">Empresario local</td><td class="muted">Partido nacional</td><td class="src">Portal municipal</td><td class="esc"><div class="esc-row"><span class="esc-n">20 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:35.0%;width:30.0%"></i><i class="pt" style="left:50.0%"></i></div></div><div class="esc-r">rango 14–26 %</div></td></tr>
+      </tbody>
+    </table>
+    <p class="verdict reveal">Lectura del escenario: sin favorito claro</p>
+  </div>
+  <div class="chrome-bottom"><span>Cada candidatura se lee por su trayectoria, la estructura que la respalda y su señal pública. El escenario se actualiza con cada evento verificado.</span><span class="pg">06</span></div>
+</section>
+
+<!-- === 6 · METODOLOGÍA === -->
+<section class="slide light" aria-label="Metodología">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Metodología</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">Metodología</p>
+    <h2 class="reveal">Cinco criterios, un índice, una probabilidad</h2>
+    <div class="method reveal">
+      <div class="crit">
+        <div class="crit-row"><b>Base electoral</b><span class="w">30</span><div class="bar"><i style="width:100%"></i></div><p>Votación histórica del sector, mesa por mesa</p></div>
+        <div class="crit-row"><b>Estructura política</b><span class="w">25</span><div class="bar"><i style="width:83.3%"></i></div><p>Casas, liderazgos y alianzas que respaldan la candidatura</p></div>
+        <div class="crit-row"><b>Imagen</b><span class="w">20</span><div class="bar"><i style="width:66.7%"></i></div><p>Conocimiento y favorabilidad, medidos con sondeo de uso interno</p></div>
+        <div class="crit-row"><b>Sintonía con la agenda</b><span class="w">15</span><div class="bar"><i style="width:50%"></i></div><p>Coincidencia entre el discurso y la conversación del territorio</p></div>
+        <div class="crit-row"><b>Presencia territorial</b><span class="w">10</span><div class="bar"><i style="width:33.3%"></i></div><p>Cobertura de barrios, veredas y grupos poblacionales</p></div>
+        <div class="crit-total"><span>Índice CivisLab por candidatura</span><span>0 a 100</span></div>
+      </div>
+      <ol class="steps">
+        <li><b>Medición</b><p>Cada criterio se calcula con fuentes verificables: Registraduría, Atlas, sondeo de uso interno, Pulso Territorial y trabajo de terreno.</p></li>
+        <li><b>Índice</b><p>Los criterios se ponderan en un índice de 0 a 100 para cada candidatura.</p></li>
+        <li><b>Probabilidad</b><p>El índice de cada candidatura se contrasta con el de sus competidores para estimar la probabilidad de ganar, con su rango.</p></li>
+        <li><b>Validación</b><p>Cada escenario se registra antes de la elección y se califica contra el resultado oficial.</p></li>
+      </ol>
+    </div>
+  </div>
+  <div class="chrome-bottom"><span>Pesos de referencia; se calibran para cada municipio con su historia electoral.</span><span class="pg">07</span></div>
+</section>
+
+<!-- === 8 · PULSO TERRITORIAL === -->
+<section class="slide dark" aria-label="Pulso Territorial">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Componente insignia</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">Social listening inteligente</p>
+    <h2 class="reveal">Pulso Territorial</h2>
+    <p class="lead reveal">Escucha lo que conversa cada comuna y vereda, separa el ruido y lo convierte en decisiones de campaña, antes de que aparezca en una encuesta.</p>
+    <ol class="flow reveal">
+      <li><b>Escucha</b><span>Emisoras y medios comunitarios, portales locales, redes públicas y reportes de terreno</span></li>
+      <li><b>Filtra</b><span>Descarta el ruido y lo que no es del municipio</span></li>
+      <li><b>Clasifica</b><span>Agenda, tono y reacción, por comuna y vereda</span></li>
+      <li><b>Alerta</b><span>Avisa cuando un tema se dispara frente a lo normal</span></li>
+      <li><b>Recomienda</b><span>Qué tema priorizar, dónde y con qué tono</span></li>
+    </ol>
+    <div class="edge reveal">
+      <div><h3>Anclado al territorio</h3><p>La conversación se cruza con el voto real de cada puesto: se sabe si el tema pesa donde están los votos.</p></div>
+      <div><h3>Escucha lo local</h3><p>Donde se hace la política municipal: la emisora del pueblo, la página del barrio, el líder de la vereda.</p></div>
+      <div><h3>Conectado al índice</h3><p>Alimenta el criterio de sintonía con la agenda y actualiza los escenarios de la campaña.</p></div>
+    </div>
+  </div>
+  <div class="chrome-bottom"><span>Análisis agregado por territorio: no se perfilan personas. Cada tema conserva el enlace a su fuente.</span><span class="pg">08</span></div>
+</section>
+
+<!-- === 9 · ASÍ LLEGA A LA CAMPAÑA === -->
+<section class="slide light" aria-label="Pulso Territorial: el brief diario">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Pulso Territorial</span></div>
+  <div class="content brief-wrap">
+    <div class="brief-text">
+      <p class="eyebrow reveal">Pulso Territorial · Entrega</p>
+      <h2 class="reveal">Así le llega la lectura del territorio a la campaña</h2>
+      <ul class="brief-points reveal">
+        <li><b>Cada semana, de su analista</b><span>Su analista de CivisLab le escribe por WhatsApp con el brief: los temas que mueven al municipio, dónde, con qué tono y qué hacer.</span></li>
+        <li><b>A cualquier hora, en su app</b><span>Usted le pregunta a CivisLab desde su app web, con acceso propio, y recibe la respuesta con los datos del municipio y su fuente.</span></li>
+        <li><b>Alertas en el momento</b><span>Si un tema se dispara, la app le avisa al celular y la campaña lo sabe antes que la competencia.</span></li>
+      </ul>
+      <p class="hyp reveal"><b>Ejemplo ilustrativo</b> Municipio y temas ficticios para mostrar el formato del servicio.</p>
+    </div>
+    <div class="phone reveal" aria-label="Ejemplo de la app de CivisLab: pulso del día y respuesta a una consulta del equipo">
+      <div class="phone-top"><span class="av">CL</span><div><b>CivisLab · App de campaña</b><small>Municipio A · acceso privado</small></div></div>
+      <div class="chat">
+        <div class="msg">
+          <p class="m-h">Pulso del martes</p>
+          <p class="m-sub">Municipio A</p>
+          <p class="m-alert"><i></i><b>Alerta:</b> Agua. Cortes en las veredas del norte. La conversación está 3 veces por encima de lo normal. Tono: indignación.</p>
+          <ol class="m-list">
+            <li><b>Agua</b> · veredas del norte · sube fuerte · indignación</li>
+            <li><b>Seguridad</b> · zona centro · estable · preocupación</li>
+            <li><b>Empleo joven</b> · todo el municipio · sube · esperanza</li>
+          </ol>
+          <p class="m-do"><b>Para hoy:</b> visita a las veredas del norte con una propuesta concreta de acueducto. En redes, esperar al foro del jueves para hablar de seguridad.</p>
+          <p class="m-src">Fuentes: emisora comunitaria, portal municipal, 2 reportes de terreno.</p>
+          <span class="m-time">7:42 a. m.</span>
+        </div>
+        <div class="msg msg-out">
+          <p>Consulta: ¿qué está preocupando en la zona centro esta semana?</p>
+          <span class="m-time">9:15 a. m.</span>
+        </div>
+        <div class="msg msg-2">
+          <p><b>Seguridad</b>, estable desde el lunes: hurtos a comercio, tono de preocupación. 4 menciones en la emisora y 2 reportes de terreno. Su analista prepara los puntos para el foro del jueves.</p>
+          <span class="m-time">9:15 a. m.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chrome-bottom"><span>El analista de CivisLab revisa cada recomendación y envía el brief personalmente; la app concentra consultas y avisos.</span><span class="pg">09</span></div>
+</section>
+
+<!-- === 8 · ENTREGABLES === -->
+<section class="slide light" aria-label="Entregables">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Servicio</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">Servicio</p>
+    <h2 class="reveal">Qué recibe la campaña</h2>
+    <div class="grid6 reveal">
+      <div class="deliv"><span class="freq">Inicial</span><h3>Línea base del municipio</h3><p>Historia electoral, estructuras de poder y diagnóstico de partida.</p></div>
+      <div class="deliv"><span class="freq d">Diario</span><h3>Pulso Territorial diario</h3><p>Temas del día, alertas y una acción concreta, cada mañana en su app.</p></div>
+      <div class="deliv"><span class="freq">Semanal</span><h3>Informe del Pulso</h3><p>Agenda, tono y reacción por comuna y vereda; su analista se lo envía cada semana.</p></div>
+      <div class="deliv"><span class="freq">Según la fase</span><h3>Sondeo de uso interno</h3><p>Semanal en precampaña y diario durante la campaña.</p></div>
+      <div class="deliv"><span class="freq">Semanal</span><h3>Sesión de análisis</h3><p>Interpretación de resultados con el equipo de estrategia.</p></div>
+      <div class="deliv"><span class="freq">Semanal</span><h3>Recomendaciones priorizadas</h3><p>Acciones sobre los criterios con mayor margen de mejora.</p></div>
+    </div>
+  </div>
+  <div class="chrome-bottom"><span>CivisLab · Información para la decisión pública</span><span class="pg">10</span></div>
+</section>
+
+<!-- === 9 · DIFERENCIAL === -->
+<section class="slide light" aria-label="Diferencial">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Diferencial</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">Diferencial</p>
+    <h2 class="reveal">Qué cambia frente a la medición tradicional</h2>
+    <table class="cmp reveal">
+      <thead><tr><th scope="col">Aspecto</th><th scope="col">Medición tradicional</th><th scope="col" class="us">CivisLab</th></tr></thead>
+      <tbody>
+        <tr><td>Frecuencia</td><td>Puntual, cada varias semanas</td><td class="us">Continua: diaria y semanal</td></tr>
+        <tr><td>Unidad de análisis</td><td>Municipio</td><td class="us">Mesa, barrio y vereda</td></tr>
+        <tr><td>Estructuras de poder</td><td>No se miden</td><td class="us">Casas, liderazgos y alianzas</td></tr>
+        <tr><td>Conversación pública</td><td>No se mide</td><td class="us">Pulso Territorial: social listening por comuna y vereda</td></tr>
+        <tr><td>Resultado entregado</td><td>Un porcentaje</td><td class="us">Probabilidad, causas y acciones</td></tr>
+        <tr><td>Acompañamiento</td><td>Informe de resultados</td><td class="us">Analista asignado y sesión semanal</td></tr>
+      </tbody>
+    </table>
+    <p class="note refs reveal">Referentes internacionales: seguimiento continuo por suscripción (Morning Consult, Estados Unidos), estimación territorial con muestras pequeñas (YouGov, Reino Unido) y reclutamiento digital calibrado (AtlasIntel).</p>
+  </div>
+  <div class="chrome-bottom"><span>CivisLab · Información para la decisión pública</span><span class="pg">11</span></div>
+</section>
+
+<!-- === 10 · GARANTÍAS === -->
+<section class="slide light" aria-label="Gobierno de la información">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Gobierno de la información</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">Gobierno de la información</p>
+    <h2 class="reveal">Rigor, confidencialidad y trazabilidad</h2>
+    <div class="guar reveal">
+      <div class="g"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><h3>Confidencialidad</h3><p>Los resultados son de uso interno de la campaña y no se divulgan como encuesta ni como sondeo.</p></div>
+      <div class="g"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Protección de datos</h3><p>Se trabaja con fuentes públicas y con información entregada con consentimiento, conforme a la Ley 1581 de 2012.</p></div>
+      <div class="g"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span><h3>Trazabilidad</h3><p>Cada cifra conserva la referencia a su fuente oficial de origen.</p></div>
+      <div class="g"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span><h3>Validación</h3><p>Los escenarios se registran antes de la elección y se califican contra el resultado oficial.</p></div>
+    </div>
+  </div>
+  <div class="chrome-bottom"><span>CivisLab · Información para la decisión pública</span><span class="pg">12</span></div>
+</section>
+
+<!-- === 11 · CIERRE === -->
+<section class="slide dark" aria-label="Cierre">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Contacto</span></div>
+  <img class="cover-map" src="mapa-colombia.png" alt="">
+  <div class="cover-grid">
+    <div class="cover-main">
+      <p class="eyebrow reveal">CivisLab · Campañas 2027</p>
+      <h1 class="reveal">Quien lee primero<br>el territorio,<br>decide con ventaja</h1>
+      <div class="recap reveal"><span><b>IPET</b>Probabilidad</span><span><b>Atlas</b>Estructuras</span><span><b>Pulso Territorial</b>Conversación</span></div>
+    </div>
+    <div class="signature reveal">
+      <p class="sig-hello sig-close">Siempre atentos para mejorar.</p>
+      <div class="sig-row"><span class="sig-name"><b>Carlos Calle Galvis</b>Fundador y CEO</span><span class="sig-sep" aria-hidden="true"></span><span class="sig-data">info.civislab@gmail.com</span><span class="sig-sep" aria-hidden="true"></span><span class="sig-data">+57 320 667 0213</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<nav class="deck-controls" aria-label="Navegación de la presentación">
+  <button type="button" id="prevBtn" aria-label="Lámina anterior"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <span class="counter" id="counter">1 / 13</span>
+  <button type="button" id="nextBtn" aria-label="Lámina siguiente"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button type="button" id="fsBtn" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="overlay-bar"><span>Demostración CivisLab · Simulación con datos ilustrativos</span><button type="button" id="closeDemo">Cerrar (Esc)</button></div>
+</div>
+
+<script>
+/* === CONTROLADOR DE LA PRESENTACIÓN === */
+(function(){
+"use strict";
+const stage=document.getElementById("deckStage");
+const slides=[...document.querySelectorAll(".slide")];
+const counter=document.getElementById("counter");
+const progress=document.getElementById("progress");
+let cur=0;
+
+/* Escala el lienzo 1920×1080 completo a la ventana */
+function scale(){
+  const f=Math.min(window.innerWidth/1920,window.innerHeight/1080);
+  const x=(window.innerWidth-1920*f)/2, y=(window.innerHeight-1080*f)/2;
+  stage.style.transform=`translate(${x}px,${y}px) scale(${f})`;
+}
+window.addEventListener("resize",scale); scale();
+
+function show(i){
+  cur=Math.max(0,Math.min(i,slides.length-1));
+  slides.forEach((s,k)=>{s.classList.toggle("active",k===cur);s.classList.toggle("visible",k===cur);s.setAttribute("aria-hidden",k===cur?"false":"true");});
+  counter.textContent=`${cur+1} / ${slides.length}`;
+  progress.style.width=`${(cur+1)/slides.length*100}%`;
+  if(slides[cur].id==="slideDemo") loadDemo();
+}
+const next=()=>show(cur+1), prev=()=>show(cur-1);
+document.getElementById("nextBtn").addEventListener("click",next);
+document.getElementById("prevBtn").addEventListener("click",prev);
+document.addEventListener("keydown",e=>{
+  if(!document.getElementById("overlay").hidden){ if(e.key==="Escape") closeOverlay(); return; }
+  if(["ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();next();}
+  else if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();prev();}
+  else if(e.key==="Home") show(0); else if(e.key==="End") show(slides.length-1);
+});
+/* Deslizar en pantallas táctiles (fuera del marco de la demo) */
+let tx=null;
+stage.addEventListener("touchstart",e=>{tx=e.target.closest(".demo-frame")?null:e.touches[0].clientX;},{passive:true});
+stage.addEventListener("touchend",e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)(dx<0?next:prev)();tx=null;},{passive:true});
+
+/* Los controles se ocultan tras 2,5 s sin movimiento para no tapar la lámina */
+const ctr=document.querySelector(".deck-controls"); let idleT=null;
+function wake(){ctr.classList.remove("idle");clearTimeout(idleT);idleT=setTimeout(()=>{if(!ctr.matches(":hover,:focus-within"))ctr.classList.add("idle");},2500);}
+["mousemove","pointerdown","keydown","touchstart"].forEach(ev=>document.addEventListener(ev,wake,{passive:true}));
+wake();
+
+/* Pantalla completa del navegador (opcional; algunos visores no la permiten) */
+document.getElementById("fsBtn").addEventListener("click",()=>{
+  const d=document;
+  try{ if(!d.fullscreenElement) d.documentElement.requestFullscreen().catch(()=>{}); else d.exitFullscreen().catch(()=>{}); }catch(_){}
+});
+
+/* === DEMOSTRACIÓN EMBEBIDA ===
+   La demo es un archivo hermano (demo.html). Se lee con fetch y se monta en un iframe srcdoc,
+   así comparte el origen de la presentación y carga sus librerías permitidas. */
+let demoDoc=null, demoLoading=null;
+function wrap(html){
+  if(/^\s*<!doctype/i.test(html)||/<html[\s>]/i.test(html)) return html;
+  return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>'+html+'</body></html>';
+}
+function getDemo(){
+  if(demoDoc) return Promise.resolve(demoDoc);
+  if(!demoLoading) demoLoading=fetch("demo.html").then(r=>{if(!r.ok) throw new Error(r.status);return r.text();}).then(t=>(demoDoc=wrap(t)));
+  return demoLoading;
+}
+function mountIframe(host,title){
+  return getDemo().then(doc=>{
+    const f=document.createElement("iframe");
+    f.title=title; f.srcdoc=doc; f.setAttribute("allow","fullscreen");
+    host.appendChild(f); return f;
+  });
+}
+let demoMounted=false;
+function loadDemo(){
+  if(demoMounted) return; demoMounted=true;
+  const host=document.getElementById("demoFrame"), msg=document.getElementById("demoMsg");
+  mountIframe(host,"Demostración interactiva de CivisLab").then(()=>{msg.remove();})
+  .catch(()=>{msg.innerHTML='<img src="demo-captura.png" alt="Captura de la demostración: ficha de un municipio del Valle de Aburrá" style="width:100%;height:100%;object-fit:contain">';msg.style.padding="0";document.getElementById("openDemo").hidden=true;demoMounted=false;});
+}
+const overlay=document.getElementById("overlay");
+let ovFrame=null;
+function openOverlay(){
+  overlay.hidden=false;
+  if(!ovFrame) mountIframe(overlay,"Demostración interactiva de CivisLab a pantalla completa").then(f=>{ovFrame=f;}).catch(()=>{});
+  document.getElementById("closeDemo").focus();
+}
+function closeOverlay(){ overlay.hidden=true; document.getElementById("openDemo").focus(); }
+document.getElementById("openDemo").addEventListener("click",openOverlay);
+document.getElementById("closeDemo").addEventListener("click",closeOverlay);
+
+/* Enlace directo a una lámina: #lamina-5 */
+const m=(location.hash||"").match(/^#lamina-(\d+)$/);
+show(m?parseInt(m[1],10)-1:0);
+})();
+</script>
+
+</body></html>
