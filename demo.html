@@ -438,7 +438,7 @@ button.fila:hover,button.fila.activa{background:#23403B}
       <a href="#servicio">Servicio</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <span class="sello"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 3.2v3.3M6 8.2v.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Escenarios simulados · No es encuesta</span>
+    
   </header>
 
   <section class="portada solo-landing" id="inicio" aria-labelledby="t-portada">
@@ -462,7 +462,7 @@ button.fila:hover,button.fila.activa{background:#23403B}
       <span class="marca solo-embed" aria-hidden="true">Civ<span class="barra"></span>s<span class="lab">Lab</span></span>
       <h2 id="t-piloto">Piloto · Valle de Aburrá · Escenario 2027</h2>
       <button class="recorrido" id="btnRecorrido" type="button" aria-pressed="false"></button>
-      <span class="sello"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 3.2v3.3M6 8.2v.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Escenario simulado · No es encuesta</span>
+      
     </div>
     <div class="piloto-cuerpo">
       <div class="mapa-caja" id="mapaCaja">
@@ -485,7 +485,7 @@ button.fila:hover,button.fila.activa{background:#23403B}
     <div class="seccion-cab">
       <p class="antetitulo">Atlas · Mapa de emociones políticas</p>
       <h2 id="t-emo">De qué se habla en cada comuna de Medellín, y en qué tono</h2>
-      <p>Los medios comunitarios son la esfera pública del barrio. CivisLab los lee para identificar la agenda de cada territorio y el tono con que se conversa. El inventario de medios es real; la agenda y el tono de esta demostración son simulados.</p>
+      <p>Los medios comunitarios son la esfera pública del barrio. CivisLab los lee para identificar la agenda de cada territorio y el tono con que se conversa.</p>
     </div>
     <div class="emo">
       <div>
@@ -576,7 +576,7 @@ button.fila:hover,button.fila.activa{background:#23403B}
     <div class="contacto">
       <div>
         <h2 id="t-con">Solicite la lectura de su municipio</h2>
-        <p>La línea base se construye con los datos oficiales del municipio y el trabajo de campo de CivisLab. El escenario de esta página es una simulación con candidaturas ficticias.</p>
+        <p>La línea base se construye con los datos oficiales del municipio y el trabajo de campo de CivisLab.</p>
       </div>
       <div class="correo">
         <code id="correo">info.civislab@gmail.com</code>
@@ -1009,7 +1009,7 @@ function aviso(msg) {
 const ACERCA = `<details class="acerca"><summary>¿Qué es este piloto?</summary>
 <p>Una demostración del servicio de CivisLab para campañas a alcaldía. Los resultados de 2019 y 2023 y los puestos de votación son datos oficiales de la Registraduría. Las candidaturas 2027, sus probabilidades, los criterios, el pulso y las recomendaciones son ficticios: describen arquetipos, no personas.</p>
 <p>No es encuesta ni sondeo y no debe divulgarse como tal.</p></details>`;
-const ETQ_SIM = `<span class="etq sim">Escenario simulado · No es encuesta</span>`;
+const ETQ_SIM = ``;
 
 function fichaPais() {
   ficha.innerHTML = `
@@ -1028,7 +1028,7 @@ function fichaPais() {
 function listaValle() {
   const lista = VALLE.slice().sort((a, b) => MUN[a].y23.margen - MUN[b].y23.margen);
   return `<section class="bloque">
-    <h4 class="bloque-t">Valle de Aburrá · escenario 2027 <span class="etq sim">Simulación</span></h4>
+    <h4 class="bloque-t">Valle de Aburrá · escenario 2027</h4>
     <ul class="lista-m">${lista.map(c => `<li><button type="button" data-m="${c}">
       <span class="nm">${esc(MUN[c].n)}</span>
       <span class="vd">${esc(ESC[c].veredicto)}</span>
@@ -1042,7 +1042,7 @@ function fichaValleLista() {
   ficha.innerHTML = `
   <div><p class="ante">Antioquia · Área metropolitana</p><h3 class="titulo">Valle de Aburrá</h3></div>
   <div class="cifras">
-    <div class="cifra"><b>${fav} de 10</b><span>municipios con favorita en el escenario 2027 simulado</span></div>
+    <div class="cifra"><b>${fav} de 10</b><span>municipios con favorita en el escenario 2027</span></div>
     <div class="cifra"><b>${nf0.format(puestos)}</b><span>puestos de votación 2023 georreferenciados</span></div>
   </div>
   ${listaValle()}
@@ -1115,7 +1115,7 @@ function fichaValle(c) {
     <div class="comp">
       <div class="comp-grupo"><span>2023 · votación oficial</span><span>% de votos</span></div>
       ${filas2023(m)}
-      <div class="comp-grupo"><span>2027 · probabilidad de ganar</span><span>simulación</span></div>
+      <div class="comp-grupo"><span>2027 · probabilidad de ganar</span><span></span></div>
       ${orden.map(k => `<button type="button" class="fila" data-c="${k.id}" style="--k:${serie(k.color)}"
           aria-label="Candidatura ${k.id}, ${esc(k.arq)}: ${k.p} por ciento de probabilidad de ganar, rango de ${k.lo} a ${k.hi}">
         <span class="quien">${avatar(k.av, k.color, 30)}<span class="txt"><b>Candidatura ${k.id}</b><small>${esc(k.arq)}</small></span></span>
@@ -1124,11 +1124,11 @@ function fichaValle(c) {
       <div class="eje" aria-hidden="true"><span></span><span class="marcas"><span>0</span><span>25</span><span>50</span><span>75</span><span>100 %</span></span><span></span></div>
     </div>
     <p style="margin-top:10px"><span class="veredicto${x.favorito ? "" : " abierto"}">${esc(x.veredicto)}</span></p>
-    <div class="leyenda-comp"><span><i class="lb"></i>Votación 2023 (dato oficial)</span><span><i class="lp"></i>Probabilidad 2027 y su rango (simulación)</span></div>
-    <p class="nota" style="margin-top:8px">Son medidas distintas sobre la misma escala: el porcentaje de votos de 2023 y la probabilidad de ganar de cada candidatura ficticia en 2027. Seleccione una candidatura para ver cómo se forma su posición.</p>
+    <div class="leyenda-comp"><span><i class="lb"></i>Votación 2023 (dato oficial)</span><span><i class="lp"></i>Probabilidad 2027 y su rango</span></div>
+    <p class="nota" style="margin-top:8px">Son medidas distintas sobre la misma escala: el porcentaje de votos de 2023 y la probabilidad de ganar de cada candidatura en 2027. Seleccione una candidatura para ver cómo se forma su posición.</p>
   </section>
   <section class="bloque">
-    <h4 class="bloque-t">Pulso de la semana <span class="etq sim">Simulación</span></h4>
+    <h4 class="bloque-t">Pulso de la semana</h4>
     <ul class="pulso">${x.pulso.map(([t, tono, tend]) => `<li><span>${esc(t)}</span><span class="tono">${esc(tono)}</span><span class="tend">${ICONO_TEND[tend]}${{ sube: "Sube", estable: "Estable", baja: "Baja" }[tend]}</span></li>`).join("")}</ul>
     <p class="nota" style="margin-top:8px">Mapa de emociones: de qué se conversa en el municipio y en qué tono.</p>
   </section>
@@ -1152,7 +1152,7 @@ function fichaCand(c, id) {
   const desc = CRIT.map((cr, j) => `${cr.n}: ${k.pts[j]} de ${cr.peso}`).join("; ");
   ficha.innerHTML = `
   <button class="volver" type="button" id="volver">← Todas las candidaturas de ${esc(m.n)}</button>
-  <div class="cand-cab">${avatar(k.av, k.color, 64)}<div><p class="ante">Candidatura ${k.id} · ficticia · ${esc(m.n)}</p><h3>${esc(k.arq)}</h3></div></div>
+  <div class="cand-cab">${avatar(k.av, k.color, 64)}<div><p class="ante">Candidatura ${k.id} · ${esc(m.n)}</p><h3>${esc(k.arq)}</h3></div></div>
   <div class="prob"><span class="grande">${k.p}<small>%</small></span>
     <p><b>Probabilidad de ganar</b><br>Rango: ${k.lo} a ${k.hi} %<br>${esc(k.pos)}</p></div>
   <p>${ETQ_SIM}</p>
@@ -1171,7 +1171,7 @@ function fichaCand(c, id) {
     <p class="nota" style="margin-top:12px">El índice resume los cinco criterios. La probabilidad de ganar resulta de comparar este índice con el de las demás candidaturas, y el rango, de simular 2.000 escenarios.</p>
   </section>
   <section class="bloque">
-    <h4 class="bloque-t">Recomendaciones estratégicas <span class="etq sim">Simulación</span></h4>
+    <h4 class="bloque-t">Recomendaciones estratégicas</h4>
     <ol class="recs">${k.recs.map(r => `<li><span class="rk">${esc(CRIT[r.k].n)}</span><p>${esc(r.t)}</p></li>`).join("")}</ol>
   </section>
   ${ACERCA}`;
@@ -1368,9 +1368,9 @@ arrancar();
     if (st.capa === "medios") {
       html = `<span>1 medio</span><span class="rampa" style="background:linear-gradient(90deg,${leerToken("--seq-bajo")},${leerToken("--seq-alto")})"></span><span>${maxMedios} medios</span><span class="etq-l real">Dato oficial</span>`;
     } else if (st.capa === "agenda") {
-      html = `<span>0 %</span><span class="rampa" style="background:linear-gradient(90deg,${leerToken("--seq-bajo")},${leerToken("--seq-alto")})"></span><span>40 % de la agenda</span><span class="etq-l sim">Simulación</span>${sd}`;
+      html = `<span>0 %</span><span class="rampa" style="background:linear-gradient(90deg,${leerToken("--seq-bajo")},${leerToken("--seq-alto")})"></span><span>40 % de la agenda</span>${sd}`;
     } else {
-      html = `<span>Más negativo</span><span class="rampa" style="background:linear-gradient(90deg,${leerToken("--div-neg")},${leerToken("--div-cero")},${leerToken("--div-pos")})"></span><span>Más positivo</span><span class="etq-l sim">Simulación</span>${sd}`;
+      html = `<span>Más negativo</span><span class="rampa" style="background:linear-gradient(90deg,${leerToken("--div-neg")},${leerToken("--div-cero")},${leerToken("--div-pos")})"></span><span>Más positivo</span>${sd}`;
     }
     $("#emoLey").innerHTML = html;
   }
@@ -1389,8 +1389,8 @@ arrancar();
       sim = `<p class="sub">Ninguno de sus medios tiene sitio web analizable. La comuna aparece sin dato: CivisLab no interpola agenda ni tono donde no hay fuente.</p>`;
     } else {
       const b = balance(c);
-      sim = `<div><h4 class="emo-h">Agenda: de qué se habla <span class="etq-l sim">Simulación</span></h4>${barras(s.temas, () => "var(--acento)")}</div>
-        <div><h4 class="emo-h">Tono <span class="etq-l sim">Simulación</span></h4>${barras(s.tono, t => (POSITIVOS.has(t) ? "var(--div-pos)" : "var(--div-neg)"))}
+      sim = `<div><h4 class="emo-h">Agenda: de qué se habla </h4>${barras(s.temas, () => "var(--acento)")}</div>
+        <div><h4 class="emo-h">Tono </h4>${barras(s.tono, t => (POSITIVOS.has(t) ? "var(--div-pos)" : "var(--div-neg)"))}
         <p class="sub" style="margin-top:8px">Balance de tono: ${firmar(b)}. Proporción de notas con tono positivo menos la de tono negativo.</p></div>`;
     }
     $("#emoDet").innerHTML = `

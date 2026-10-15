@@ -247,47 +247,6 @@ h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:
 .ask li{display:flex;align-items:center;gap:12px}
 .ask li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--salvia);flex:none}
 
-/* === LÁMINAS DEL RELATO DESDE EL CANDIDATO === */
-.kstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:auto}
-.kstrip div{border-top:4px solid var(--verde);padding-top:18px}
-.kstrip div:nth-child(2){border-top-color:var(--salvia)}
-.kstrip div:nth-child(3){border-top-color:var(--negro)}
-.kstrip b{display:block;font-family:var(--display);font-weight:900;font-size:64px;line-height:1;color:var(--verde);font-variant-numeric:tabular-nums;white-space:nowrap}
-.kstrip b small{font-size:32px;font-weight:700}
-.kstrip p{font-size:24px;line-height:1.4;color:var(--texto2);margin-top:10px}
-.vs{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
-.vs-col{border-radius:14px;padding:38px 44px}
-.vs-col h3{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-.vs-col ul{list-style:none;display:flex;flex-direction:column;gap:18px;margin-top:26px}
-.vs-col li{position:relative;padding-left:34px;font-size:29px;line-height:1.35}
-.vs-col li::before{content:"";position:absolute;left:0;top:13px;width:14px;height:14px;border-radius:50%}
-.vs-old{background:var(--blanco);border:1px solid var(--linea)}
-.vs-old h3{color:var(--texto3)} .vs-old li{color:var(--texto2)} .vs-old li::before{background:#C2C7C0}
-.vs-new{background:var(--verde);color:var(--papel)}
-.vs-new h3{color:var(--salvia)} .vs-new li::before{background:var(--salvia)}
-.lb{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;margin-top:26px;align-items:start}
-.mini{width:100%;border-collapse:separate;border-spacing:0;background:var(--blanco);border:1px solid var(--linea);border-radius:14px;overflow:hidden;font-size:24px}
-.mini th,.mini td{padding:14px 26px;text-align:left;border-bottom:1px solid var(--linea);vertical-align:middle}
-.mini tr:last-child td{border-bottom:0}
-.mini thead th{font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--texto3);background:#EEF0EC}
-.mini td.name{font-weight:700;font-size:26px;width:42%}
-.mini tr.me td{background:#E3ECDD}
-.mini tr.me td.name{color:var(--verde)}
-.find{display:flex;flex-direction:column;gap:16px}
-.fcard{background:var(--blanco);border:1px solid var(--linea);border-left:6px solid var(--salvia);border-radius:0 14px 14px 0;padding:20px 30px}
-.fcard.hot{border-left-color:var(--verde)}
-.fcard .k,.qpanel .k{font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--texto3)}
-.fcard p{font-size:25px;line-height:1.4;color:var(--texto2);margin-top:6px}
-.fcard .big{display:block;font-family:var(--display);font-weight:900;font-size:56px;line-height:1.05;color:var(--verde);margin:4px 0 2px}
-.week{gap:18px;margin-top:34px}
-.week b em{font-style:normal;font-family:var(--display);font-size:17px;letter-spacing:.12em;text-transform:uppercase;color:var(--papel);background:var(--verde);border-radius:999px;padding:4px 14px;margin-right:12px;vertical-align:4px}
-.week span{font-size:25px}
-.qpanel{margin-top:auto;display:grid;grid-template-columns:260px 1fr;gap:36px;align-items:center;background:var(--verde);border-radius:14px;padding:34px 44px}
-.qpanel .k{color:var(--salvia)}
-.qpanel .qq{font-size:38px;font-weight:600;font-style:italic;line-height:1.25;color:var(--papel)}
-.qpanel p:not(.qq){font-size:25px;line-height:1.4;color:var(--salvia-2);margin-top:10px}
-.card .k+p{margin-top:2px}
-
 /* === TABLA COMPARATIVA === */
 .cmp{width:100%;border-collapse:separate;border-spacing:0;margin-top:40px;font-size:29px;background:var(--blanco);border:1px solid var(--linea);border-radius:14px;overflow:hidden}
 .cmp th,.cmp td{padding:15px 34px;text-align:left;border-bottom:1px solid var(--linea);vertical-align:top}
@@ -353,47 +312,36 @@ h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:
   </div>
 </section>
 
-<!-- === 2 · Para ganar === -->
-<section class="slide light" aria-label="Para ganar">
-  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Lo que decide una elección</span></div>
+<!-- === 2 · CONTEXTO === -->
+<section class="slide light" aria-label="Contexto">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Contexto</span></div>
   <div class="content">
-    <p class="eyebrow reveal">Lo que decide una elección</p>
-    <h2 class="reveal">Para ganar, una campaña necesita saber tres cosas cada semana</h2>
-    <div class="cols reveal" style="margin-top:44px">
-      <div class="card t-verde"><span class="k">01</span><h3>Reconocimiento</h3><p>¿Cuántos saben quién es su candidatura, y en qué barrios todavía no?</p></div>
-      <div class="card t-salvia"><span class="k">02</span><h3>Percepción</h3><p>¿Qué piensan de ella quienes la conocen: confianza, cercanía o rechazo?</p></div>
-      <div class="card t-negro"><span class="k">03</span><h3>Intención de voto</h3><p>¿Cuántos la votarían hoy, y frente a quién compite de verdad?</p></div>
+    <p class="eyebrow reveal">Contexto</p>
+    <h2 class="reveal">Las elecciones locales se definen por márgenes estrechos</h2>
+    <div class="kpis reveal">
+      <div class="kpi"><div class="n">39 <small>de 125</small></div><p>alcaldías de Antioquia se definieron en 2023 por menos de 5 puntos porcentuales.</p></div>
+      <div class="kpi"><div class="n">12</div><p>de ellas, por menos de 2 puntos.</p></div>
+      <div class="kpi"><div class="n">0,1 <small>pts</small></div><p>separaron al ganador del segundo lugar en La Estrella.</p></div>
     </div>
-    <div class="kstrip reveal">
-      <div><b>39 <small>de 125</small></b><p>alcaldías de Antioquia se definieron en 2023 por menos de 5 puntos.</p></div>
-      <div><b>12</b><p>de ellas, por menos de 2 puntos.</p></div>
-      <div><b>0,1 <small>pts</small></b><p>separaron al ganador del segundo lugar en La Estrella.</p></div>
-    </div>
+    <p class="statement reveal" style="margin-top:auto">En contiendas así de cerradas, cada decisión de campaña cuenta, y su calidad depende de la información con que se toma.</p>
   </div>
   <div class="chrome-bottom"><span>Fuente: Registraduría Nacional del Estado Civil, alcaldías 2023; diferencia entre primer y segundo lugar. Cálculo CivisLab.</span><span class="pg">02</span></div>
 </section>
 
-<!-- === 3 · Encuesta y seguimiento === -->
-<section class="slide light" aria-label="Encuesta y seguimiento">
-  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Cómo se mide</span></div>
+<!-- === 3 · DIAGNÓSTICO === -->
+<section class="slide light" aria-label="Diagnóstico">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Diagnóstico</span></div>
   <div class="content">
-    <p class="eyebrow reveal">Cómo se mide</p>
-    <h2 class="reveal">Una encuesta es una foto. La campaña necesita la película.</h2>
-    <div class="vs reveal">
-      <div class="vs-col vs-old"><h3>Encuesta tradicional</h3><ul>
-        <li>Una medición cada mes, o menos</li>
-        <li>Todo el municipio resumido en un número</li>
-        <li>Alto costo por cada medición</li>
-        <li>Entre una y otra, la campaña decide sin datos</li></ul></div>
-      <div class="vs-col vs-new"><h3>Seguimiento CivisLab</h3><ul>
-        <li>Sondeos de uso interno cada semana o cada quince días</li>
-        <li>Por barrio, vereda o perfil de votante</li>
-        <li>Costo por medición mucho menor</li>
-        <li>Cada lectura termina en una decisión para la semana</li></ul></div>
+    <p class="eyebrow reveal">Diagnóstico</p>
+    <h2 class="reveal">Las campañas deciden con información fragmentada</h2>
+    <div class="cols reveal">
+      <div class="card t-verde"><h3>Mediciones puntuales</h3><p>Las encuestas describen un momento, tardan en llegar y pierden vigencia en pocas semanas.</p></div>
+      <div class="card t-salvia"><h3>Fuentes desconectadas</h3><p>Resultados históricos, redes sociales y reportes de terreno se analizan por separado y sin un criterio común.</p></div>
+      <div class="card t-negro"><h3>Un mapa político en transformación</h3><p>En 2023, 80 de 125 alcaldes de Antioquia llegaron por movimientos sin un bloque partidista identificable. La etiqueta de partido ya no anticipa el voto.</p></div>
     </div>
-    <p class="statement reveal" style="margin-top:auto">Si la campaña necesita una encuesta para divulgar, CivisLab la coordina con una firma registrada.</p>
+    <p class="statement reveal" style="margin-top:auto">La ventaja competitiva está en integrar la información y leerla a tiempo.</p>
   </div>
-  <div class="chrome-bottom"><span>Los sondeos de CivisLab son de uso interno de la campaña y no se divulgan, conforme a la Ley 2494 de 2025.</span><span class="pg">03</span></div>
+  <div class="chrome-bottom"><span>Fuente: Registraduría Nacional y CEDAE-Uniandes, alcaldías 2015–2023. Clasificación de avales: CivisLab.</span><span class="pg">03</span></div>
 </section>
 
 <!-- === 4 · QUÉ ES CIVISLAB === -->
@@ -412,7 +360,42 @@ h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:
   <div class="chrome-bottom"><span>Procedencia trazable · Validación contra resultados reales · Uso confidencial</span><span class="pg">04</span></div>
 </section>
 
-<!-- === 5 · METODOLOGÍA === -->
+<!-- === 5 · DEMOSTRACIÓN === -->
+<section class="slide light" aria-label="Demostración" id="slideDemo">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Demostración</span></div>
+  <div class="content">
+    <div class="demo-head">
+      <div><p class="eyebrow">Demostración</p><h2>Del departamento al municipio</h2></div>
+      <button class="btn" type="button" id="openDemo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Pantalla completa</button>
+    </div>
+    <div class="demo-frame" id="demoFrame"><div class="demo-msg" id="demoMsg">Cargando la demostración…</div></div>
+    <p class="note demo-cap">Valle de Aburrá: resultados de alcaldía 2019 y 2023 de la Registraduría Nacional y escenario 2027 por candidatura.</p>
+  </div>
+  <div class="chrome-bottom"><span>Recorrido automático; cualquier interacción lo detiene.</span><span class="pg">05</span></div>
+</section>
+
+<!-- === 6 · RADAR DE ACTORES === -->
+<section class="slide light" aria-label="Radar de actores">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Radar de actores</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">IPET · Radar de actores</p>
+    <h2 class="reveal">Municipio A, 2027: quién aparece en el radar</h2>
+    <table class="radar reveal">
+      <thead><tr><th scope="col">Candidatura</th><th scope="col">Trayectoria</th><th scope="col">Estructura</th><th scope="col">Señal pública</th><th scope="col">Escenario 2027</th></tr></thead>
+      <tbody>
+        <tr><td class="name">Candidato 1</td><td class="muted">Exalcalde del municipio</td><td class="muted">Casa política tradicional</td><td class="src">Prensa regional</td><td class="esc"><div class="esc-row"><span class="esc-n">21 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:37.5%;width:30.0%"></i><i class="pt" style="left:52.5%"></i></div></div><div class="esc-r">rango 15–27 %</div></td></tr>
+        <tr><td class="name">Candidato 2</td><td class="muted">Concejal en ejercicio</td><td class="muted">Movimiento ciudadano</td><td class="src">Redes y emisora local</td><td class="esc"><div class="esc-row"><span class="esc-n">19 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:32.5%;width:30.0%"></i><i class="pt" style="left:47.5%"></i></div></div><div class="esc-r">rango 13–25 %</div></td></tr>
+        <tr><td class="name">Candidato 3</td><td class="muted">Exsecretario de despacho</td><td class="muted">Coalición de gobierno saliente</td><td class="src">Prensa regional</td><td class="esc"><div class="esc-row"><span class="esc-n">23 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:42.5%;width:30.0%"></i><i class="pt" style="left:57.5%"></i></div></div><div class="esc-r">rango 17–29 %</div></td></tr>
+        <tr><td class="name">Candidato 4</td><td class="muted">Líder comunitario</td><td class="muted">Firmas ciudadanas</td><td class="src">Terreno</td><td class="esc"><div class="esc-row"><span class="esc-n">17 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:30.0%;width:27.5%"></i><i class="pt" style="left:42.5%"></i></div></div><div class="esc-r">rango 12–23 %</div></td></tr>
+        <tr><td class="name">Candidato 5</td><td class="muted">Empresario local</td><td class="muted">Partido nacional</td><td class="src">Portal municipal</td><td class="esc"><div class="esc-row"><span class="esc-n">20 %</span><div class="esc-bar" aria-hidden="true"><i class="w" style="left:35.0%;width:30.0%"></i><i class="pt" style="left:50.0%"></i></div></div><div class="esc-r">rango 14–26 %</div></td></tr>
+      </tbody>
+    </table>
+    <p class="verdict reveal">Lectura del escenario: sin favorito claro</p>
+  </div>
+  <div class="chrome-bottom"><span>Cada candidatura se lee por su trayectoria, la estructura que la respalda y su señal pública. El escenario se actualiza con cada evento verificado.</span><span class="pg">06</span></div>
+</section>
+
+<!-- === 6 · METODOLOGÍA === -->
 <section class="slide light" aria-label="Metodología">
   <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Metodología</span></div>
   <div class="content">
@@ -435,42 +418,43 @@ h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:
       </ol>
     </div>
   </div>
-  <div class="chrome-bottom"><span>Pesos de referencia; se calibran para cada municipio con su historia electoral.</span><span class="pg">05</span></div>
+  <div class="chrome-bottom"><span>Pesos de referencia; se calibran para cada municipio con su historia electoral.</span><span class="pg">07</span></div>
 </section>
 
-<!-- === 6 · CÓMO ARRANCAMOS === -->
-<section class="slide light" aria-label="Cómo arrancamos">
-  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Puesta en marcha</span></div>
+<!-- === 8 · PULSO TERRITORIAL === -->
+<section class="slide dark" aria-label="Pulso Territorial">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Componente insignia</span></div>
   <div class="content">
-    <p class="eyebrow reveal">Puesta en marcha</p>
-    <h2 class="reveal">Cómo arranca el trabajo con su campaña</h2>
-    <ol class="ruta reveal">
-      <li><span class="when">Día 0</span><b>Acuerdo</b><p>Contrato digital con alcance, valor mensual y compromiso de reserva de la información.</p></li>
-      <li><span class="when">Semana 1</span><b>Reunión de inicio</b><p>Se presentan los acuerdos del proceso y el plan de trabajo con su cronograma.</p></li>
-      <li><span class="when">Semanas 1 a 3</span><b>Entrevistas a profundidad</b><p>Al menos diez conversaciones de una hora con personas del círculo político de la candidatura: qué pasó, qué está pasando y qué viene.</p></li>
-      <li><span class="when">Días 10 a 15</span><b>Línea base</b><p>Municipio zonificado por barrios, historia electoral, mapa de poder y diagnóstico de partida.</p></li>
-      <li><span class="when">En adelante</span><b>Operación semanal</b><p>Pulso Territorial, sondeos de uso interno y sesión de análisis cada lunes.</p></li>
+    <p class="eyebrow reveal">Social listening inteligente</p>
+    <h2 class="reveal">Pulso Territorial</h2>
+    <p class="lead reveal">Escucha lo que conversa cada barrio y vereda, separa el ruido y lo convierte en decisiones de campaña, antes de que aparezca en una encuesta.</p>
+    <ol class="flow reveal">
+      <li><b>Escucha</b><span>Emisoras y medios comunitarios, portales locales, redes públicas y reportes de terreno</span></li>
+      <li><b>Filtra</b><span>Descarta el ruido y lo que no es del municipio</span></li>
+      <li><b>Clasifica</b><span>Agenda, tono y reacción, por barrio y vereda</span></li>
+      <li><b>Alerta</b><span>Avisa cuando un tema se dispara frente a lo normal</span></li>
+      <li><b>Recomienda</b><span>Qué tema priorizar, dónde y con qué tono</span></li>
     </ol>
-    <div class="ask reveal">
-      <h3>Lo que pedimos a la campaña</h3>
-      <ul><li>Diez contactos de su círculo político</li><li>Un delegado con capacidad de decisión</li><li>Una hora cada lunes</li></ul>
+    <div class="edge reveal">
+      <div><h3>Anclado al territorio</h3><p>La conversación se cruza con el voto real de cada puesto: se sabe si el tema pesa donde están los votos.</p></div>
+      <div><h3>Escucha lo local</h3><p>Donde se hace la política municipal: la emisora del pueblo, la página del barrio, el líder de la vereda.</p></div>
+      <div><h3>Conectado al índice</h3><p>Alimenta el criterio de sintonía con la agenda y actualiza los escenarios de la campaña.</p></div>
     </div>
   </div>
-  <div class="chrome-bottom"><span>Las entrevistas ponen en contexto lo que los datos no explican: alianzas, lealtades y tensiones internas.</span><span class="pg">06</span></div>
+  <div class="chrome-bottom"><span>Análisis agregado por territorio: no se perfilan personas. Cada tema conserva el enlace a su fuente.</span><span class="pg">08</span></div>
 </section>
 
-<!-- === 7 · Una semana con CivisLab === -->
-<section class="slide light" aria-label="Una semana con CivisLab">
-  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Ritmo de trabajo</span></div>
+<!-- === 9 · ASÍ LLEGA A LA CAMPAÑA === -->
+<section class="slide light" aria-label="Pulso Territorial: el brief diario">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Pulso Territorial</span></div>
   <div class="content brief-wrap">
     <div class="brief-text">
-      <p class="eyebrow reveal">Ritmo de trabajo</p>
-      <h2 class="reveal">Una semana de campaña con CivisLab</h2>
-      <ul class="brief-points week reveal">
-        <li><b><em>Lunes</em> Sesión de análisis</b><span>Presencial, con dos preguntas: ¿cómo se ganó la semana pasada y qué hacemos para ganar la próxima?</span></li>
-        <li><b><em>Martes</em> Brief del Pulso</b><span>Su analista le escribe por WhatsApp: los temas que mueven al municipio, dónde, con qué tono y qué hacer.</span></li>
-        <li><b><em>En la semana</em> Sondeos</b><span>En el barrio, la vereda o el público que se definió el lunes.</span></li>
-        <li><b><em>A toda hora</em> App y alertas</b><span>Consultas a CivisLab y aviso al celular cuando un tema se dispara.</span></li>
+      <p class="eyebrow reveal">Pulso Territorial · Entrega</p>
+      <h2 class="reveal">Así le llega la lectura del territorio a la campaña</h2>
+      <ul class="brief-points reveal">
+        <li><b>Cada semana, de su analista</b><span>Su analista de CivisLab le escribe por WhatsApp con el brief: los temas que mueven al municipio, dónde, con qué tono y qué hacer.</span></li>
+        <li><b>A cualquier hora, en su app</b><span>Usted le pregunta a CivisLab desde su app web, con acceso propio, y recibe la respuesta con los datos del municipio y su fuente.</span></li>
+        <li><b>Alertas en el momento</b><span>Si un tema se dispara, la app le avisa al celular y la campaña lo sabe antes que la competencia.</span></li>
       </ul>
     </div>
     <div class="phone reveal" aria-label="Ejemplo de la app de CivisLab: pulso del día y respuesta a una consulta del equipo">
@@ -500,46 +484,10 @@ h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:
       </div>
     </div>
   </div>
-  <div class="chrome-bottom"><span>El analista de CivisLab revisa cada recomendación y envía el brief personalmente; la app concentra consultas y avisos.</span><span class="pg">07</span></div>
+  <div class="chrome-bottom"><span>El analista de CivisLab revisa cada recomendación y envía el brief personalmente; la app concentra consultas y avisos.</span><span class="pg">09</span></div>
 </section>
 
-<!-- === 8 · Sondeos microterritoriales === -->
-<section class="slide light" aria-label="Sondeos microterritoriales">
-  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Sondeos de uso interno</span></div>
-  <div class="content">
-    <p class="eyebrow reveal">Sondeos de uso interno</p>
-    <h2 class="reveal">Preguntar donde está la duda, de la forma en que la gente responde</h2>
-    <div class="cols reveal" style="margin-top:40px">
-      <div class="card t-verde"><span class="k">Barrio</span><p>Solo los barrios que la campaña necesita leer, no toda la ciudad.</p></div>
-      <div class="card t-salvia"><span class="k">Vereda</span><p>Una vereda o un corregimiento, su casco urbano o su zona rural.</p></div>
-      <div class="card t-negro"><span class="k">Perfil</span><p>Mujeres jóvenes, adultos mayores, primeros votantes: el público que define.</p></div>
-    </div>
-    <div class="qpanel reveal">
-      <span class="k">Pregunta indirecta</span>
-      <div><p class="qq">«¿A cuál de estas personas le confiaría el cuidado de sus hijos?»</p>
-      <p>Mide confianza sin preguntar por el rechazo: la gente responde con sus valores, no con su postura política.</p></div>
-    </div>
-  </div>
-  <div class="chrome-bottom"><span>Sondeos digitales sobre plataformas que ya segmentan por territorio y perfil. Resultados de uso interno; no se divulgan.</span><span class="pg">08</span></div>
-</section>
-
-<!-- === 9 · Caso de referencia === -->
-<section class="slide dark" aria-label="Caso de referencia">
-  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Caso de referencia</span></div>
-  <div class="content">
-    <p class="eyebrow reveal">Por qué entrevistamos</p>
-    <h2 class="reveal">Diez entrevistas que cambiaron una decisión de campaña</h2>
-    <div class="layers reveal">
-      <div class="layer l1"><span class="n">01</span><h3>La pregunta</h3><p>Una campaña legislativa debía decidir cómo ir con la aliada que la había impulsado: con ella, sin ella o con ella pero sin mencionarla.</p></div>
-      <div class="layer l2"><span class="n">02</span><h3>Lo que se escuchó</h3><p>Agradecimiento, pero distancia: la estructura no se sentía tratada como par y no iba a trabajar por ella.</p></div>
-      <div class="layer l3"><span class="n">03</span><h3>La decisión</h3><p>Campaña independiente, sin romper la alianza ni mencionarla. El candidato ganó; la aliada perdió más de la mitad de su votación.</p></div>
-    </div>
-    <p class="result reveal">Las entrevistas encuentran lo que no aparece en ningún dato público.</p>
-  </div>
-  <div class="chrome-bottom"><span>Caso real de la experiencia del equipo, presentado sin nombres.</span><span class="pg">09</span></div>
-</section>
-
-<!-- === 10 · ENTREGABLES === -->
+<!-- === 8 · ENTREGABLES === -->
 <section class="slide light" aria-label="Entregables">
   <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Servicio</span></div>
   <div class="content">
@@ -557,7 +505,28 @@ h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:
   <div class="chrome-bottom"><span>CivisLab entrega el análisis y la recomendación; la ejecución de la comunicación queda en manos del equipo de la campaña.</span><span class="pg">10</span></div>
 </section>
 
-<!-- === 11 · DIFERENCIAL === -->
+<!-- === 11 · CÓMO ARRANCAMOS === -->
+<section class="slide light" aria-label="Cómo arrancamos">
+  <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Puesta en marcha</span></div>
+  <div class="content">
+    <p class="eyebrow reveal">Puesta en marcha</p>
+    <h2 class="reveal">Cómo arranca el trabajo con su campaña</h2>
+    <ol class="ruta reveal">
+      <li><span class="when">Día 0</span><b>Acuerdo</b><p>Contrato digital con alcance, valor mensual y compromiso de reserva de la información.</p></li>
+      <li><span class="when">Semana 1</span><b>Reunión de inicio</b><p>Se presentan los acuerdos del proceso y el plan de trabajo con su cronograma.</p></li>
+      <li><span class="when">Semanas 1 a 3</span><b>Entrevistas a profundidad</b><p>Al menos diez conversaciones de una hora con personas del círculo político de la candidatura: qué pasó, qué está pasando y qué viene.</p></li>
+      <li><span class="when">Días 10 a 15</span><b>Línea base</b><p>Municipio zonificado por barrios, historia electoral, mapa de poder y diagnóstico de partida.</p></li>
+      <li><span class="when">En adelante</span><b>Operación semanal</b><p>Pulso Territorial, sondeos de uso interno y sesión de análisis cada lunes.</p></li>
+    </ol>
+    <div class="ask reveal">
+      <h3>Lo que pedimos a la campaña</h3>
+      <ul><li>Diez contactos de su círculo político</li><li>Un delegado con capacidad de decisión</li><li>Una hora cada lunes</li></ul>
+    </div>
+  </div>
+  <div class="chrome-bottom"><span>Las entrevistas ponen en contexto lo que los datos no explican: alianzas, lealtades y tensiones internas.</span><span class="pg">11</span></div>
+</section>
+
+<!-- === 12 · DIFERENCIAL === -->
 <section class="slide light" aria-label="Diferencial">
   <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Diferencial</span></div>
   <div class="content">
@@ -577,10 +546,10 @@ h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:
     </table>
     <p class="note refs reveal">Referentes internacionales: seguimiento continuo por suscripción (Morning Consult, Estados Unidos), estimación territorial con muestras pequeñas (YouGov, Reino Unido) y reclutamiento digital calibrado (AtlasIntel).</p>
   </div>
-  <div class="chrome-bottom"><span>CivisLab · Información para la decisión pública</span><span class="pg">11</span></div>
+  <div class="chrome-bottom"><span>CivisLab · Información para la decisión pública</span><span class="pg">12</span></div>
 </section>
 
-<!-- === 12 · GARANTÍAS === -->
+<!-- === 13 · GARANTÍAS === -->
 <section class="slide light" aria-label="Gobierno de la información">
   <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Gobierno de la información</span></div>
   <div class="content">
@@ -593,10 +562,10 @@ h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:
       <div class="g"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></span><h3>Validación</h3><p>Los escenarios se registran antes de la elección y se califican contra el resultado oficial.</p></div>
     </div>
   </div>
-  <div class="chrome-bottom"><span>CivisLab · Información para la decisión pública</span><span class="pg">12</span></div>
+  <div class="chrome-bottom"><span>CivisLab · Información para la decisión pública</span><span class="pg">13</span></div>
 </section>
 
-<!-- === 13 · CIERRE === -->
+<!-- === 14 · CIERRE === -->
 <section class="slide dark" aria-label="Cierre">
   <div class="chrome-top"><span class="logo" aria-label="CivisLab">Civ<span class="bar"></span>s<span class="l">Lab</span></span><span class="section-tag">Contacto</span></div>
   <img class="cover-map" src="mapa-colombia.png" alt="">
@@ -618,7 +587,7 @@ h2{font-size:60px;line-height:1.12;color:var(--verde);margin-top:18px;max-width:
 
 <nav class="deck-controls" aria-label="Navegación de la presentación">
   <button type="button" id="prevBtn" aria-label="Lámina anterior"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
-  <span class="counter" id="counter">1 / 13</span>
+  <span class="counter" id="counter">1 / 14</span>
   <button type="button" id="nextBtn" aria-label="Lámina siguiente"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
   <button type="button" id="fsBtn" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
 </nav>
@@ -712,8 +681,8 @@ function openOverlay(){
   if(!ovFrame) mountIframe(overlay,"Demostración interactiva de CivisLab a pantalla completa").then(f=>{ovFrame=f;}).catch(()=>{});
   document.getElementById("closeDemo").focus();
 }
-function closeOverlay(){ overlay.hidden=true; document.getElementById("openDemo")?.focus(); }
-document.getElementById("openDemo")?.addEventListener("click",openOverlay);
+function closeOverlay(){ overlay.hidden=true; document.getElementById("openDemo").focus(); }
+document.getElementById("openDemo").addEventListener("click",openOverlay);
 document.getElementById("closeDemo").addEventListener("click",closeOverlay);
 
 /* Enlace directo a una lámina: #lamina-5 */
